@@ -4,9 +4,13 @@ const mockAPIResponse = require("./mockAPI.js");
 const aylien = require("aylien_textapi");
 const dotenv = require("dotenv");
 const cors = require("cors");
+const bodyParser = require("body-parser");
 
 dotenv.config();
 const app = express();
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.use(express.static("dist"));
 
@@ -33,7 +37,41 @@ app.listen(8081, function () {
 app.get("/test", function (req, res) {
   res.send(mockAPIResponse);
 });
-app.post("/post", function (req, res) {
-  res.send(req.body);
-  // res.send(mockAPIResponse)
-});
+
+
+const appData = {};
+
+const analysisFunction = async (req, res) => {
+  await textapi.classify({
+    'text': req.body.document
+  }, (error, response) =>  {
+    if (error === null) {
+      appData.categories = response.categories
+    }
+  });
+
+  await textapi.sentiment({
+    'text': req.body.document
+  }, (error, response) =>  {
+    if (error === null) {
+      appData.polarity = response.polarity
+      appData.subjectivity = response.subjectivity
+    }
+  });
+
+ await textapi.entities({
+    'text': req.body.document
+  }, (error, response) =>  {
+    if (error === null) {
+      appData.location = response.entities.location
+      appData.keyword = response.entities.keyword
+      appData.organization = response.entities.organization
+      appData.person = response.entities.person
+    }
+    res.send(JSON.stringify(appData));
+    
+  });
+  
+}
+
+app.post("/add", analysisFunction);
