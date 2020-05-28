@@ -1,51 +1,83 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8">
-        <title>Test</title>
-        <link rel="stylesheet" href="/styles/resets.css">
-        <link rel="stylesheet" href="/styles/base.css">
-        <link rel="stylesheet" href="/styles/header.css">
-        <link rel="stylesheet" href="/styles/form.css">
-        <link rel="stylesheet" href="/styles/footer.css">
-    </head>
 
-    <body>
+<head>
+    <meta charset="utf-8">
+    <title>Test</title>
+    <link rel="stylesheet" href="/styles/resets.css">
+    <link rel="stylesheet" href="/styles/base.css">
+    <link rel="stylesheet" href="/styles/header.css">
+    <link rel="stylesheet" href="/styles/form.css">
+    <link rel="stylesheet" href="/styles/footer.css">
+</head>
 
-        <header>
-            <div class="">
-                Logo
-            </div>
-            <div class="">
-                navigation
-            </div>
-        </header>
+<body>
 
-        <main>
+    <header>
+        <div class="">
+            Logo
+        </div>
+        <div class="">
+            navigation
+        </div>
+    </header>
+
+    <main>
+        <section>
+            <form class="" onsubmit="return Client.handleSubmit(event)">
+                <label for="text"> enter you text below: </label>
+                <textarea id="text" type="text" rows="5" cols="100" name="text" value="" onblur="onBlur()"> </textarea>
+                <br>
+                <input type="submit" name="" value="submit" onclick="return Client.handleSubmit(event)"
+                    onsubmit="return Client.handleSubmit(event)">
+            </form>
             <section>
-                <form class="" onsubmit="return Client.handleSubmit(event)">
-                    <textarea id="text" type="text" rows="5" cols="33" name="input" value="" onblur="onBlur()" placeholder="Name"> </textarea> <br>
-                    <input type="submit" name="" value="submit" onclick="return Client.handleSubmit(event)" onsubmit="return Client.handleSubmit(event)">
-                </form>
-            <section>
 
-            <section>
-                <strong>Form Results:</strong>
-                <div id="results"></div>
-            </section>
-        </main>
+                <section>
+                    <strong>Form Results:</strong>
+                    <div>
+                        <h2>labels:</h2>
+                        <p class="text" id="label"></p>
+                    </div>
+                    <div>
+                        <h2>polarity:</h2>
+                        <p class="text" id="polarity"></p>
+                    </div>
+                    <div>
+                        <h2>subjectivity:</h2>
+                        <p class="text" id="subjectivity"></p>
+                    </div>
+                    <div>
+                        <h2>location:</h2>
+                        <p class="text" id="location"></p>
+                    </div>
+                    <div>
+                        <h2>organization:</h2>
+                        <p class="text" id="organization"></p>
+                    </div>
+                    <div>
+                        <h2>person:</h2>
+                        <p class="text" id="person"></p>
+                    </div>
+                    <div>
+                        <h2>keywords:</h2>
+                        <p class="text" id="keywords"></p>
+                    </div>
+                </section>
+    </main>
 
-        <footer>
-            <p>This is a footer</p>
-        </footer>
-        <script>
-            // Check that service workers are supported
-            if ('serviceWorker' in navigator) {
-                // Use the window load event to keep the page load performant
-                window.addEventListener('load', () => {
-                    navigator.serviceWorker.register('/service-worker.js');
-                });
-            }
-        </script>
-    </body>
+    <footer>
+        <p>This is a footer</p>
+    </footer>
+    <script>
+        // Check that service workers are supported
+        if ('serviceWorker' in navigator) {
+            // Use the window load event to keep the page load performant
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js');
+            });
+        }
+    </script>
+</body>
+
 </html>
