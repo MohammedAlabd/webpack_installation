@@ -1,28 +1,30 @@
-function handleSubmit(event) {
+const handleSubmit = async (event) => {
   event.preventDefault();
-
   let text = document.querySelector("#text").value;
   // check what text was put into the form field
-  // checkForName(text)
 
-  const configObj = {
-    METHOD: {
-      method: "POST",
-      credentials: "same-origin",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: text,
+  const dataToPost = {
+    document: text,
+  };
+
+  const optionJSON = {
+    method: "POST",
+    credentials: "same-origin",
+    headers: {
+      "Content-Type": "application/json",
     },
+    body: JSON.stringify(dataToPost),
   };
 
   console.log("::: Form Submitted :::");
-  fetch("http://localhost:8081/post", configObj)
-    .then((res) => res.json())
-    .then(function (res) {
-      console.log(res);
-      document.getElementById("results").innerHTML = res.message;
-    });
-}
+  const res = await fetch("http://localhost:8081/add", optionJSON);
+  try {
+    const json = await res.json();
+    console.log(json);
+    Client.renderResults(json);
+  } catch (error) {
+    console.error("error", error);
+  }
+};
 
 export { handleSubmit };
