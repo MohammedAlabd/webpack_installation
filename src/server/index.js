@@ -38,40 +38,58 @@ app.get("/test", function (req, res) {
   res.send(mockAPIResponse);
 });
 
-
 const appData = {};
 
 const analysisFunction = async (req, res) => {
-  await textapi.classify({
-    'text': req.body.document
-  }, (error, response) =>  {
-    if (error === null) {
-      appData.categories = response.categories
+  await textapi.classify(
+    {
+      text: req.body.document,
+    },
+    (error, response) => {
+      if (error === null) {
+        appData.label = response.categories.length === 0 ? "There is no label detected" : response.categories[0].label 
+      }
     }
-  });
+  );
 
-  await textapi.sentiment({
-    'text': req.body.document
-  }, (error, response) =>  {
-    if (error === null) {
-      appData.polarity = response.polarity
-      appData.subjectivity = response.subjectivity
+  await textapi.sentiment(
+    {
+      text: req.body.document,
+    },
+    (error, response) => {
+      if (error === null) {
+        appData.polarity = response.polarity;
+        appData.subjectivity = response.subjectivity;
+      }
     }
-  });
+  );
 
- await textapi.entities({
-    'text': req.body.document
-  }, (error, response) =>  {
-    if (error === null) {
-      appData.location = response.entities.location
-      appData.keyword = response.entities.keyword
-      appData.organization = response.entities.organization
-      appData.person = response.entities.person
+  await textapi.entities(
+    {
+      text: req.body.document,
+    },
+    (error, response) => {
+      if (error === null) {
+        appData.location = response.entities.location
+          ? response.entities.location[0]
+          : "There is no location detected";
+
+        appData.keyword = response.entities.keyword
+          ? response.entities.keyword.slice(0, 6).join(" & ")
+          : "There is no keyWords detected";
+
+        appData.organization = response.entities.organization
+          ? response.entities.organization[0]
+          : "There is no organization detected";
+
+        appData.person = response.entities.person
+          ? response.entities.person.join(" & ")
+          : "There is no person detected";
+      }
+      console.log(appData)
+      res.send(JSON.stringify(appData));
     }
-    res.send(JSON.stringify(appData));
-    
-  });
-  
-}
+  );
+};
 
 app.post("/add", analysisFunction);
