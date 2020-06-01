@@ -13,11 +13,8 @@ const renderResults = (json) => {
   document.querySelector("#polarity").innerHTML = polarity;
   document.querySelector("#subjectivity").innerHTML = subjectivity;
   document.querySelector("#person").innerHTML = person
-
   document.querySelector("#keywords").innerHTML = keyword
-
   document.querySelector("#location").innerHTML = location
-
   document.querySelector("#organization").innerHTML = organization
 
 };
