@@ -22,8 +22,10 @@ const handleSubmit = async (event) => {
     const json = await res.json();
     console.log(json);
     Client.renderResults(json);
+    return 1;
   } catch (error) {
     console.error("error", error);
+    return 0;
   }
 };
 
