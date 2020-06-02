@@ -15,9 +15,9 @@ const handleSubmit = async (event) => {
     },
     body: JSON.stringify(dataToPost),
   };
-  if(!formValidData(input)) {
-    alert("please enter an atrial of 10 words or more")
-    return
+  if (!formValidData(input)) {
+    alert("please enter an atrial of 10 words or more");
+    return 0;
   }
   console.log("::: Form Submitted :::");
   const res = await fetch("http://localhost:8081/add", optionJSON);
@@ -31,7 +31,7 @@ const handleSubmit = async (event) => {
   }
 };
 
-const formValidData =(input) => {
-  return input.split(" ").length > 9 
-}
+const formValidData = (input) => {
+  return input.split(" ").length > 9;
+};
 export { handleSubmit };

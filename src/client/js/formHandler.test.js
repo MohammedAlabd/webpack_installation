@@ -33,7 +33,16 @@ afterAll(() => {
 
 describe("handleSubmit", () => {
   it("works", async () => {
-    const json = await handleSubmit({ preventDefault: () => null });
-    expect(json).toEqual(1);
+    const state = await handleSubmit({ preventDefault: () => null });
+    expect(state).toEqual(1);
+  });
+});
+
+describe("formValidDate", () => {
+  it("works", async () => {
+    dom.window.document.querySelector("#text").innerHTML = ""
+    global.alert = () => true
+    const state = await handleSubmit({ preventDefault: () => null });
+    expect(state).toEqual(0);
   });
 });
