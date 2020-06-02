@@ -1,10 +1,10 @@
 const handleSubmit = async (event) => {
   event.preventDefault();
-  let text = document.querySelector("#text").value;
+  let input = document.querySelector("#text").value;
   // check what text was put into the form field
 
   const dataToPost = {
-    document: text,
+    document: input,
   };
 
   const optionJSON = {
@@ -15,7 +15,10 @@ const handleSubmit = async (event) => {
     },
     body: JSON.stringify(dataToPost),
   };
-
+  if(!formValidData(input)) {
+    alert("please enter an atrial of 10 words or more")
+    return
+  }
   console.log("::: Form Submitted :::");
   const res = await fetch("http://localhost:8081/add", optionJSON);
   try {
@@ -28,4 +31,7 @@ const handleSubmit = async (event) => {
   }
 };
 
+const formValidData =(input) => {
+  return input.split(" ").length > 9 
+}
 export { handleSubmit };
