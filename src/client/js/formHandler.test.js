@@ -34,7 +34,6 @@ afterAll(() => {
 describe("handleSubmit", () => {   
     it("works", async () => {
       const json = await handleSubmit({ preventDefault: () => null });
-      console.log(json)
       expect(json).toEqual(1);
     });
   });

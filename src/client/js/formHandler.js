@@ -20,7 +20,6 @@ const handleSubmit = async (event) => {
   const res = await fetch("http://localhost:8081/add", optionJSON);
   try {
     const json = await res.json();
-    console.log(json);
     Client.renderResults(json);
     return 1;
   } catch (error) {
