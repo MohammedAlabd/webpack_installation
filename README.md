@@ -1,17 +1,19 @@
-# Webpack Express With Sass Example App
+# Evaluate a News Article with Natural Language Processing
 
-The goal of this repo is be an example of a basic but functional app built on Express and Webpack.
+## this is a small app you can use it to evaluate any Article to get some information like:
+- Its label.
+- its polarity.
+- its subjectivity.
+- its keywords.
+- its location.
+- its organization.
+- as well as how is the people mentioned inside it.
 
-If you want to follow along, start from branch 0-initial-setup. Each branch in this project is a step along the path to creating a fully functional webpack setup. In each branch, there will be a documentation file that lists out the steps taken in that branch (each step is also roughly a git commit if you look at the history) which you can use as a checklist when setting up your own projects. 
+## This project have two sides:
+1. first we have the server side which is will receive the article from the client side and send it to the api to evaluate it and it will receive the data from the api and parse it into a valid data to send it again to client side
 
-## What we will cover
+2. And the client side which is will take the input from user and send it to the backend _server side_ in order to receive the evaluated and parsed data to render it on the screen
 
-We will cover:
-
-- Transpiling Sass to CSS using Webpack
-- Fixing Javascript event errors
-- Building a better production config for Webpack
-- Adding Service Workers to our app using Webpack
 
 ## Get Up and Running
 
